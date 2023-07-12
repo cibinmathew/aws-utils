@@ -6,7 +6,7 @@ aws ce get-cost-and-usage --time-period Start=$(date "+%Y-%m-01"),End=$(date --d
 cat /tmp/cloud-bill.json | jq '[ .ResultsByTime[].Groups[] | select(.Metrics.UnblendedCost.Amount > "0") | { (.Keys[0]): .Metrics.UnblendedCost } ] | sort_by(.Amount) | add' > /tmp/cloud-bill2.json 
 
 # Sort and display in a table with left aligned
-python3 -c 'import os,json; f = open("/tmp/cloud-bill2.json"); data = json.load(f); data=dict(sorted(data.items(), key=lambda item: item[1]["Amount"] , reverse=True)) ; print("\n".join(["{:<35}: {}".format(service, val["Amount"]) for service,val in data.items()]))'♑
+python3 -c 'import os,json; f = open("/tmp/cloud-bill2.json"); data = json.load(f); data=dict(sorted(data.items(), key=lambda item: item[1]["Amount"] , reverse=True)) ; print("\n".join(["{:<35}: {}".format(service, val["Amount"]) for service,val in data.items()]))'
 
 # https://stackoverflow.com/questions/68312370/how-can-i-get-the-daily-costs-using-the-aws-cli
 
