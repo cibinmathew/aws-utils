@@ -9,3 +9,4 @@
 ```sh
 $ assumerole
 ```
+![Alt Text](assume-role.png)
